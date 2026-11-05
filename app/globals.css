@@ -1,0 +1,393 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Design tokens
+   One ground, one ink, one accent; square photographs; Work Sans in two weights.
+   ========================================================================== */
+@theme {
+  --font-sans: var(--font-work-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --color-ground: #f3f2ee;
+  --color-surface: #e8e6e0;
+  --color-paper: #ffffff;
+  --color-ink: #1d1c1a;
+  --color-muted: #5d5a55;
+  --color-line: #d6d3cc;
+  --color-line-strong: #a9a59d;
+  --color-accent: #c2410c;
+  --color-accent-strong: #a8380b;
+  --color-on-accent: #ffffff;
+  --color-inv: #1d1c1a;
+  --color-inv-surface: #292826;
+  --color-inv-ink: #f3f2ee;
+  --color-inv-muted: #a8a7a2;
+  --color-whatsapp: #25d366;
+  --color-danger: #b42318;
+
+  /* Type scale (desktop / phone pairs) */
+  --text-h1: 3rem;
+  --text-h1--line-height: 1.104;
+  --text-h1--letter-spacing: -0.025em;
+  --text-h1-sm: 2rem;
+  --text-h1-sm--line-height: 1.156;
+  --text-h1-sm--letter-spacing: -0.02em;
+  --text-h2: 2rem;
+  --text-h2--line-height: 1.25;
+  --text-h2--letter-spacing: -0.02em;
+  --text-h2-sm: 1.5rem;
+  --text-h2-sm--line-height: 1.25;
+  --text-h2-sm--letter-spacing: -0.015em;
+  --text-lead: 1.25rem;
+  --text-lead--line-height: 1.5;
+  --text-lead-sm: 1.125rem;
+  --text-lead-sm--line-height: 1.556;
+  --text-name: 1.25rem;
+  --text-name--line-height: 1.4;
+  --text-name-sm: 1.125rem;
+  --text-name-sm--line-height: 1.444;
+  --text-body: 1rem;
+  --text-body--line-height: 1.625;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.43;
+  --text-label: 0.8125rem;
+  --text-label--line-height: 1.23;
+  --text-moment: clamp(2.5rem, 6vw, 5.5rem);
+  --text-moment--line-height: 1.02;
+  --text-moment--letter-spacing: -0.03em;
+
+  --radius-btn: 2px;
+  --ease-ui: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+:root {
+  --nav: 56px;
+  --bar: calc(64px + env(safe-area-inset-bottom));
+  --gut: 24px;
+  color-scheme: light;
+}
+@media (min-width: 640px) {
+  :root {
+    --nav: 72px;
+    --bar: 0px;
+    --gut: 48px;
+  }
+}
+@media (min-width: 1024px) {
+  :root {
+    --gut: 64px;
+  }
+}
+@media (min-width: 1280px) {
+  :root {
+    --gut: 120px;
+  }
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--nav) + 16px);
+}
+
+body {
+  background: var(--color-ground);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.625;
+  font-feature-settings: "kern";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  padding-top: var(--nav);
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 400;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--color-accent) 22%, transparent);
+}
+
+img {
+  max-width: 100%;
+}
+
+/* Focus: a 2px ring in the accent that settles from 6px to 2px. */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  animation: focus-settle 200ms var(--ease-ui);
+}
+@keyframes focus-settle {
+  from {
+    outline-offset: 6px;
+  }
+}
+
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+@utility wrap {
+  width: min(100% - 2 * var(--gut), 1200px);
+  margin-inline: auto;
+}
+
+@utility section-pad {
+  padding-top: 96px;
+  padding-bottom: calc(48px + var(--bar));
+  @media (min-width: 640px) {
+    padding-top: 120px;
+    padding-bottom: 72px;
+  }
+}
+
+@utility page-pad {
+  padding-top: 40px;
+  padding-bottom: calc(64px + var(--bar));
+  @media (min-width: 640px) {
+    padding-top: 56px;
+    padding-bottom: 96px;
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   Components and the hover layer
+   ========================================================================== */
+@layer components {
+  /* Buttons: one filled (the main action) and one outline style. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 48px;
+    padding: 0 24px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-btn);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    user-select: none;
+    transition:
+      background-color 200ms var(--ease-ui),
+      border-color 200ms var(--ease-ui),
+      color 200ms var(--ease-ui),
+      transform 200ms var(--ease-ui);
+  }
+  .btn-primary {
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--color-ink);
+    border-color: var(--color-ink);
+  }
+  .btn-secondary-inv {
+    background: transparent;
+    color: var(--color-inv-ink);
+    border-color: var(--color-inv-ink);
+  }
+  .btn-sm {
+    min-height: 44px;
+    padding: 0 16px;
+  }
+  .btn:active:not(:disabled) {
+    transform: translateY(1px) scale(0.985);
+    transition-duration: 90ms;
+  }
+  .btn:disabled,
+  .btn[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Text links: a faint hairline at rest; an ink line draws left to right on hover. */
+  .link {
+    background-image:
+      linear-gradient(currentColor, currentColor),
+      linear-gradient(color-mix(in srgb, currentColor 30%, transparent), color-mix(in srgb, currentColor 30%, transparent));
+    background-size:
+      0% 1px,
+      100% 1px;
+    background-position:
+      0 100%,
+      0 100%;
+    background-repeat: no-repeat;
+    padding-bottom: 2px;
+    text-decoration: none;
+    transition: background-size 200ms var(--ease-ui);
+  }
+
+  /* Nav and footer words: bare at rest, a 1px line draws 4px under on hover. */
+  .nav-link {
+    position: relative;
+    text-decoration: none;
+    transition: color 200ms var(--ease-ui);
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 200ms var(--ease-ui);
+  }
+  .nav-link[aria-current="page"]::after {
+    height: 2px;
+    transform: scaleX(1);
+  }
+
+  /* Linked cards lift 2px; their photo zooms inside its frame. */
+  .card-linked {
+    position: relative;
+    transition:
+      transform 180ms var(--ease-ui),
+      border-color 200ms var(--ease-ui);
+  }
+  .zoom-frame {
+    overflow: hidden;
+  }
+  .zoom-img {
+    transition: transform 600ms var(--ease-ui);
+  }
+  .card-title {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 200ms var(--ease-ui);
+  }
+  /* Makes the whole card clickable while the title stays the real link. */
+  .stretched-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  /* Form fields */
+  .field {
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    padding: 10px 14px;
+    border: 1px solid var(--color-line-strong);
+    border-radius: var(--radius-btn);
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-size: 1rem;
+    line-height: 1.5;
+    transition:
+      border-color 140ms var(--ease-ui),
+      box-shadow 140ms var(--ease-ui);
+  }
+  .field::placeholder {
+    color: color-mix(in srgb, var(--color-muted) 80%, transparent);
+  }
+  .field:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-accent) 22%, transparent);
+  }
+  .field[aria-invalid="true"] {
+    border-color: var(--color-danger);
+  }
+  textarea.field {
+    min-height: 96px;
+    resize: vertical;
+  }
+  select.field {
+    appearance: none;
+    padding-right: 40px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%231d1c1a' stroke-width='1.5' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+  }
+  .label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.8125rem;
+    line-height: 1.23;
+    font-weight: 500;
+  }
+
+  /* Count badge pulse when an item is added (a response to the visitor's click). */
+  .badge-bump {
+    animation: badge-bump 320ms var(--ease-ui);
+  }
+  @keyframes badge-bump {
+    40% {
+      transform: scale(1.18);
+    }
+  }
+}
+
+/* Hover states only for a fine pointer; touch screens get the press state. */
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    transition-duration: 140ms;
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: color-mix(in oklab, var(--color-accent), var(--color-ink) 14%);
+  }
+  .btn-secondary:hover:not(:disabled) {
+    background: color-mix(in oklab, var(--color-ink) 6%, transparent);
+  }
+  .btn-secondary-inv:hover:not(:disabled) {
+    background: color-mix(in oklab, var(--color-inv-ink) 10%, transparent);
+  }
+  .link:hover {
+    background-size:
+      100% 1px,
+      100% 1px;
+    transition-duration: 140ms;
+  }
+  .nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+    transition-duration: 140ms;
+  }
+  .card-linked:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-line-strong);
+  }
+  .card-linked:hover .zoom-img {
+    transform: scale(1.03);
+  }
+  .card-linked:hover .card-title {
+    background-size: 100% 1px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-property: opacity, color, background-color, border-color !important;
+  }
+}

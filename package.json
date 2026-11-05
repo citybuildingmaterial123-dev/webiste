@@ -1,0 +1,39 @@
+{
+  "name": "city-building-materials",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Catalogue and quotation website for a building materials store. Products are managed in Google Sheets and baked in at build time.",
+  "scripts": {
+    "sync": "tsx scripts/sync-catalog.ts",
+    "predev": "tsx scripts/sync-catalog.ts --if-missing --dev",
+    "dev": "next dev",
+    "prebuild": "tsx scripts/sync-catalog.ts",
+    "build": "next build",
+    "start": "npx serve@14 out",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts"
+  },
+  "dependencies": {
+    "lucide-react": "^1.69.0",
+    "next": "16.4.5",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@next/env": "16.4.5",
+    "@tailwindcss/turbopack": "^4",
+    "@types/node": "^24",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.5",
+    "sharp": "^0.35.5",
+    "tailwindcss": "^4",
+    "tsx": "^4.23.15",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=20.9"
+  }
+}

@@ -1,0 +1,63 @@
+id,category,subcategory,product_name,brand,description,image_url,specifications,units,featured,status
+HW-101,Hardwares,Hinges,Stainless Steel Butt Hinge 4 inch,,"Butt hinge for wooden doors and windows, with a satin finish that resists rust.",,"Material: Stainless steel | Size: 4 inch | Finish: Satin | Thickness: 2.5 mm","Pairs, Pieces",yes,active
+HW-102,Hardwares,Hinges,Soft-Close Concealed Cabinet Hinge,,"Concealed hinge for kitchen and wardrobe shutters that closes gently without slamming.",,"Type: Full overlay | Opening angle: 110° | Mounting: Clip-on | Soft close built in","Pieces, Pairs, Boxes",,active
+HW-103,Hardwares,Handles,Aluminium Profile Handle,,"Slim profile handle for wardrobe and kitchen shutters, cut to the length you need.",,"Material: Aluminium | Finish: Black matte, champagne gold | Lengths: 6 inch to 8 ft","Pieces, Feet",,active
+HW-104,Hardwares,Handles,Main Door Pull Handle,,"Long pull handle for main doors, in brushed stainless steel.",,"Material: SS 304 | Lengths: 12, 18 and 24 inch | Finish: Brushed","Pieces, Pairs",,active
+HW-105,Hardwares,Fittings,Tower Bolt 6 inch,,"Tower bolt for doors and windows in stainless steel and brass finishes.",,"Size: 6 inch | Material: Stainless steel, brass","Pieces, Boxes",,active
+HW-106,Hardwares,Fittings,Telescopic Drawer Channel,,"Ball-bearing drawer channels for smooth, full-extension drawers.",,"Lengths: 12 to 24 inch | Extension: Full | Mounting: Side","Pairs, Sets",,active
+HW-107,Hardwares,Modular Kitchen,Tandem Drawer System,,"Drawer system for modular kitchens with soft-close runners and metal sides.",,"Widths: 450 to 900 mm | Close: Soft close | Colours: Grey, white","Sets, Pieces",yes,active
+HW-108,Hardwares,Modular Kitchen,Stainless Steel Cutlery Basket,,"Pull-out cutlery and plate baskets for kitchen base units.",,"Material: SS 304 | Cabinet widths: 15 to 36 inch","Pieces, Sets",,active
+HW-109,Hardwares,PVC Panel,PVC Wall Panel 10 inch,,"Waterproof PVC panels for walls and ceilings in bathrooms, kitchens and shops.",,"Width: 10 inch | Length: 10 ft | Finish: Matte, gloss, wood grain","Pieces, Sq. ft",,active
+HW-110,Hardwares,Fluted Panel,WPC Fluted Wall Panel,,"Fluted (ribbed) panels for feature walls, TV units and reception areas.",,"Material: WPC | Size: 4 x 9.5 ft | Thickness: 12 mm | Colours: Teak, walnut, white","Pieces, Sq. ft",yes,active
+EL-201,Electricals,Wires & Cables,FR PVC House Wire 1.5 sq mm,,"Flame-retardant copper house wire for lighting circuits.",,"Size: 1.5 sq mm | Conductor: Copper | Insulation: FR PVC | Coil length: 90 m","Coils, Metres",yes,active
+EL-202,Electricals,Wires & Cables,FR PVC House Wire 2.5 sq mm,,"Copper house wire for power sockets and heavier loads.",,"Size: 2.5 sq mm | Conductor: Copper | Insulation: FR PVC | Coil length: 90 m","Coils, Metres",,active
+EL-203,Electricals,Wires & Cables,Armoured Power Cable,,"Armoured cable for underground and outdoor power supply.",,"Cores: 2 to 4 | Sizes: 4 to 25 sq mm | Conductor: Copper, aluminium",Metres,,active
+EL-204,Electricals,Switches,Modular Switch 6A,,"One-way modular switch for homes and offices.",,"Rating: 6A | Type: One way | Size: 1 module | Colour: White","Pieces, Boxes",,active
+EL-205,Electricals,Switches,Modular Socket 16A,,"Power socket for geysers, air conditioners and kitchen appliances.",,"Rating: 16A | Pins: 6 | Size: 2 module","Pieces, Boxes",,active
+EL-206,Electricals,MCB,Single Pole MCB,,"Miniature circuit breaker that protects a single circuit from overload.",,"Poles: Single | Ratings: 6A to 63A | Curve: C",Pieces,,active
+EL-207,Electricals,MCB,Distribution Board 8-Way,,"Distribution board that houses the MCBs for a home or small shop.",,"Ways: 8 | Door: Double | Mounting: Flush",Pieces,,active
+EL-208,Electricals,Plumbing,CPVC Pipe 3/4 inch,,"CPVC pipe for hot and cold water lines in homes.",,"Size: 3/4 inch | Length: 3 m | Pressure class: SDR 11","Lengths, Pieces",,active
+EL-209,Electricals,Plumbing,UPVC Pipe Fittings,,"Elbows, tees, couplers and reducers for UPVC plumbing lines.",,"Sizes: 1/2 to 2 inch | Types: Elbow, tee, coupler, reducer","Pieces, Boxes",,active
+EL-210,Electricals,Tanks,Water Storage Tank 1000 L,,"Three-layer plastic water tank for rooftops and terraces.",,"Capacity: 1000 litres | Layers: 3 | Colour: Black",Pieces,yes,active
+EL-211,Electricals,Tanks,Water Storage Tank 500 L,,"Compact three-layer water tank for smaller homes and utility areas.",,"Capacity: 500 litres | Layers: 3 | Colour: Black",Pieces,,active
+PL-301,Plywoods,MR Grade,MR Grade Plywood 18 mm,,"Moisture-resistant plywood for interior furniture, wardrobes and partitions.",,"Grade: MR | Thickness: 18 mm | Size: 8 x 4 ft",Sheets,yes,active
+PL-302,Plywoods,MR Grade,MR Grade Plywood 12 mm,,"Thinner MR plywood for shelves, back panels and drawer bases.",,"Grade: MR | Thickness: 12 mm | Size: 8 x 4 ft",Sheets,,active
+PL-303,Plywoods,BMR,BMR Plywood 18 mm,,"BMR grade plywood for furniture and interior work.",,"Grade: BMR | Thickness: 18 mm | Size: 8 x 4 ft",Sheets,,active
+PL-304,Plywoods,BWP,BWP Plywood 18 mm,,"Boiling-water-proof plywood for kitchens, bathrooms and other wet areas.",,"Grade: BWP | Thickness: 18 mm | Size: 8 x 4 ft",Sheets,yes,active
+PL-305,Plywoods,BWP,BWP Plywood 12 mm,,"BWP plywood in 12 mm for kitchen shutters and vanity units.",,"Grade: BWP | Thickness: 12 mm | Size: 8 x 4 ft",Sheets,,active
+PL-306,Plywoods,OSL,OSL Board 18 mm,,"OSL board for furniture and interior work. Ask us for the colours in stock.",,"Thickness: 18 mm | Size: 8 x 4 ft",Sheets,,active
+PL-307,Plywoods,BSL,BSL Board 18 mm,,"BSL board for wardrobes, cabinets and office furniture. Ask us for the colours in stock.",,"Thickness: 18 mm | Size: 8 x 4 ft",Sheets,,active
+PL-308,Plywoods,MDF,Plain MDF Board 18 mm,,"Medium-density fibreboard with a smooth surface for painted and laminated furniture.",,"Thickness: 18 mm | Size: 8 x 4 ft",Sheets,,active
+PL-309,Plywoods,Green Board,Green Board 18 mm,,"Green board for furniture and interior work. Ask us for thickness and size options.",,"Thickness: 18 mm | Size: 8 x 4 ft",Sheets,,active
+PL-310,Plywoods,WPC,WPC Board 18 mm,,"Wood-plastic composite board for kitchens and bathroom vanities.",,"Thickness: 18 mm | Size: 8 x 4 ft | Water resistant | Termite resistant",Sheets,,active
+PL-311,Plywoods,Mica,Decorative Mica Sheet 1 mm,,"Decorative laminate sheets in solid, wood-grain and textured finishes.",,"Thickness: 1 mm | Size: 8 x 4 ft | Finishes: Gloss, suede, texture",Sheets,,active
+PL-312,Plywoods,Checked Plywood,Checked Plywood 12 mm,,"Checked plywood for interior and general work. Share the thickness and quantity you need.",,"Thickness: 12 mm | Size: 8 x 4 ft",Sheets,,active
+RF-401,Roofing Sheets,PUF Sheets,PUF Insulated Roof Panel,,"Sandwich panel with a PUF core that keeps heat out, for factories, cold rooms and sheds.",,"Core: PUF | Thickness: 30, 40 and 50 mm | Width: 1000 mm | Length: Cut to size","Sheets, Sq. ft",yes,active
+RF-402,Roofing Sheets,Tile Model Sheets,Tile-Profile Roofing Sheet,,"Colour-coated sheet pressed in a roof-tile profile for homes and sit-outs.",,"Thickness: 0.45 mm | Profile: Tile | Colours: Brick red, grey, green","Sheets, Feet",,active
+RF-403,Roofing Sheets,Linear Sheets,Linear Profile Roofing Sheet,,"Trapezoidal metal roofing sheet for sheds and warehouses.",,"Thickness: 0.40 to 0.50 mm | Profile: Trapezoidal | Length: Cut to size","Sheets, Feet",,active
+RF-404,Roofing Sheets,GC Sheets,GC Corrugated Sheet,,"Galvanised corrugated sheet for sheds, fencing and temporary roofs.",,"Thickness: 0.30 to 0.80 mm | Lengths: 6 to 12 ft","Sheets, Feet",,active
+RF-405,Roofing Sheets,JSW Sheets,JSW Colour Coated Roofing Sheet,JSW,"Colour-coated roofing sheet from JSW in several colours and thicknesses.",,"Thickness: 0.45 to 0.50 mm | Profile: Trapezoidal | Length: Cut to size","Sheets, Feet",,active
+RF-406,Roofing Sheets,Aspetz,Aspetz Roofing Sheet,,"Roofing sheets for sheds and utility roofs. Ask us for the sizes in stock.",,"Lengths: 6 to 10 ft",Sheets,,active
+SS-501,Stainless Steel,Jindal,Jindal Stainless Steel Sheet,Jindal,"Stainless steel sheet for kitchens, railings and fabrication.",,"Grades: 304, 202 | Thickness: 0.5 to 3 mm | Finishes: 2B, mirror, hairline","Sheets, Kg",yes,active
+SS-502,Stainless Steel,JSS 304,JSS 304 Sheet,JSS,"SS 304 sheet for food-grade and outdoor work.",,"Grade: 304 | Thickness: 0.5 to 3 mm | Size: 8 x 4 ft","Sheets, Kg",,active
+SS-503,Stainless Steel,Rishi 304,Rishi 304 Pipe,Rishi,"SS 304 pipes for railings, grills and fabrication.",,"Grade: 304 | Shapes: Round, square, rectangle | Sizes: 1/2 to 4 inch","Lengths, Kg, Feet",,active
+SS-504,Stainless Steel,SS Sheets,SS Chequered Sheet,,"Anti-slip chequered stainless steel sheet for steps, ramps and platforms.",,"Thickness: 1.5 to 3 mm | Size: 8 x 4 ft","Sheets, Kg",,active
+SS-505,Stainless Steel,SS Sheets,SS Mirror Finish Sheet,,"Mirror-polished stainless steel sheet for wall cladding, lift interiors and decor.",,"Grades: 304, 202 | Thickness: 0.6 to 1.5 mm | Finish: Mirror (No. 8)","Sheets, Kg",,active
+MS-601,MS & GI Pipe,MS Pipe,MS Round Pipe,,"Mild steel round pipe for structures, gates and fabrication.",,"Sizes: 1/2 to 6 inch | Class: Light, medium, heavy | Length: 6 m","Lengths, Kg",yes,active
+MS-602,MS & GI Pipe,MS Pipe,MS Square and Rectangular Tube,,"Square and rectangular MS tubes for frames, grills and sheds.",,"Sizes: 20 x 20 to 100 x 100 mm | Thickness: 1.2 to 4 mm | Length: 6 m","Lengths, Kg",,active
+MS-603,MS & GI Pipe,GP Pipe,GP Square Pipe,,"Galvanised pre-coated pipe that resists rust, for sheds, frames and furniture.",,"Sizes: 20 x 20 to 75 x 75 mm | Thickness: 1 to 2 mm | Length: 6 m","Lengths, Kg",,active
+MS-604,MS & GI Pipe,APL MS Pipe,APL MS Hollow Section,APL Apollo,"MS hollow sections for structural and fabrication work.",,"Shapes: Square, rectangle, round | Length: 6 m","Lengths, Kg",,active
+MS-605,MS & GI Pipe,APL GP Pipe,APL GP Pipe,APL Apollo,"Galvanised pre-coated pipes for sheds, frames and outdoor structures.",,"Shapes: Square, rectangle, round | Length: 6 m","Lengths, Kg",,active
+MS-606,MS & GI Pipe,MS Sheets,MS Sheet,,"Mild steel sheet for fabrication, gates and machine parts.",,"Thickness: 1 to 12 mm | Size: 8 x 4 ft","Sheets, Kg",,active
+MS-607,MS & GI Pipe,GP Sheets,GP Plain Sheet,,"Galvanised plain sheet for ducts, flashing and fabrication.",,"Thickness: 0.4 to 2 mm | Size: 8 x 4 ft","Sheets, Kg",,active
+MS-608,MS & GI Pipe,Weldmesh,Welded Wire Mesh,,"Welded mesh for fencing, grills and reinforcement.",,"Openings: 1 x 1 to 4 x 4 inch | Wire: 10 to 14 gauge | Rolls and panels","Rolls, Sq. ft, Kg",,active
+CL-701,Cladding Sheets,ACP Sheets,ACP Sheet 4 mm,,"Aluminium composite panel for building fronts, signage and interiors.",,"Thickness: 3, 4 and 6 mm | Size: 8 x 4 ft | Finishes: Solid, metallic, wood","Sheets, Sq. ft",yes,active
+CL-702,Cladding Sheets,HPL Sheets,Exterior HPL Cladding Sheet,,"High-pressure laminate panels for facades and exterior walls.",,"Thickness: 6 to 12 mm | Use: Exterior | Finishes: Solid, wood grain","Sheets, Sq. ft",,active
+CL-703,Cladding Sheets,Metal Panel Sheets,Metal Facade Panel,,"Metal panels for facades and elevations, cut and finished to your design.",,"Material: Aluminium | Finish: Powder coated | Size: Made to order","Sheets, Sq. ft",,active
+CL-704,Cladding Sheets,WBC,WBC Board,,"WBC for cladding and interior work. Ask us for sizes and finishes.",,"Size: 8 x 4 ft","Sheets, Sq. ft",,active
+DR-801,Doors,Wooden Doors,Teak Wood Panel Door,,"Solid wood panel door for main entrances.",,"Wood: Teak | Size: Made to order | Finish: Polished",Pieces,yes,active
+DR-802,Doors,Wooden Doors,Flush Door 32 mm,,"Flush door for bedrooms and interiors, ready for laminate or paint.",,"Thickness: 32 mm | Sizes: 7 x 3 ft, 7 x 2.5 ft | Core: Hardwood",Pieces,,active
+DR-803,Doors,Modular Doors,Laminated Modular Door,,"Pre-laminated door supplied with its frame, for quick fitting in apartments and offices.",,"Includes: Door, frame | Sizes: Standard and made to order","Sets, Pieces",,active
+DR-804,Doors,UV Doors,UV-Coated Designer Door,,"Glossy UV-coated door with a scratch-resistant surface that is easy to clean.",,"Finish: UV gloss | Thickness: 30 mm | Sizes: Standard and made to order",Pieces,,active
+DR-805,Doors,Steel Doors,Steel Security Door,,"Steel door for main entrances, utility rooms and commercial spaces.",,"Material: Galvanised steel | Finish: Powder coated | Sizes: Standard and made to order","Pieces, Sets",,active
+DR-899,Doors,Steel Doors,Fire-Rated Steel Door,,"Draft row: hidden from the website until the status is changed to active.",,,Pieces,,draft

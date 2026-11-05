@@ -1,0 +1,46 @@
+# Checks every push and pull request: lint, unit tests, a full static build, type check.
+# Cloudflare Pages does the real production build and deploy from this repository.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Unit tests
+        run: npm test
+
+      # No Google Sheet secrets here, so the build uses data/sample-products.csv.
+      # This proves the site still builds; Cloudflare builds the real catalogue.
+      - name: Build (sample catalogue)
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://example.pages.dev
+
+      - name: Type check
+        run: npm run typecheck
