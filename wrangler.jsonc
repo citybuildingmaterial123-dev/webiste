@@ -1,0 +1,14 @@
+// Cloudflare Workers (static assets only): serves the exported site in ./out.
+// "name" must match the Worker name in the Cloudflare dashboard, or the build fails.
+// Dashboard build settings: Build command `npm run build`, Deploy command `npx wrangler deploy`.
+{
+  "name": "webiste",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./out",
+    // Unknown URLs get out/404.html with a real 404 status.
+    "not_found_handling": "404-page",
+    // /about -> /about/ (matches trailingSlash: true in next.config.ts).
+    "html_handling": "auto-trailing-slash"
+  }
+}
