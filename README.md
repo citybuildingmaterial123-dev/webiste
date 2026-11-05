@@ -111,13 +111,17 @@ None of these values reach the browser. The service is in
 
 ### How changes go live
 
-The site is static, so sheet edits appear after a rebuild (usually 1–3 minutes):
+The site is static, so sheet edits appear after a rebuild:
 
-- **Button in the sheet:** add [`scripts/google-apps-script/publish-menu.gs`](scripts/google-apps-script/publish-menu.gs)
-  to the sheet (instructions inside). It adds **Website → Publish changes**, which calls your
-  host's deploy hook.
-- **Automatic:** schedule the deploy hook (for example a daily GitHub Action or the host's scheduler).
-- **Manually:** "Redeploy" in the host dashboard.
+- **Automatically within an hour:** the GitHub workflow
+  [`refresh-catalogue.yml`](.github/workflows/refresh-catalogue.yml) reads the sheet every hour.
+  When the contents changed, it commits a new fingerprint to `data/catalog-version.txt`, and that
+  push makes Cloudflare rebuild. Set the repository variables `GOOGLE_SHEET_ID` and
+  `GOOGLE_SHEET_GID` (GitHub → Settings → Secrets and variables → Actions → Variables).
+- **Immediately, from the sheet:** add [`scripts/google-apps-script/publish-menu.gs`](scripts/google-apps-script/publish-menu.gs)
+  to the sheet (instructions inside). It adds **Website → Publish changes**.
+- **Immediately, from GitHub:** Actions → Refresh catalogue → Run workflow (tick "force" after
+  replacing a photo on Drive, which does not change the sheet itself).
 
 ### If the sheet cannot be read during a build
 
@@ -147,17 +151,23 @@ WhatsApp opens with a structured message → the customer presses send.
 
 `npm run build` creates the complete site in **`out/`**.
 
-### Cloudflare Pages (connected to this GitHub repository)
+### Cloudflare Workers (connected to this GitHub repository)
+
+The site runs as a static-assets Worker configured in [`wrangler.jsonc`](wrangler.jsonc)
+(serves `out/`, real 404 page, trailing-slash URLs). Its `name` must match the Worker name in
+the Cloudflare dashboard (`webiste`).
 
 | Setting | Value |
 | --- | --- |
-| Production branch | `main` |
-| Framework preset | `None` (or "Next.js (Static HTML Export)", then change the build command below) |
+| Git branch | `main` |
 | Build command | `npm run build` (not `npx next build`, which would skip the Google Sheet sync) |
-| Build output directory | `out` |
+| Deploy command | `npx wrangler deploy` |
+| Non-production branch deploy command | `npx wrangler versions upload` (default) |
 | Root directory | leave empty |
 
-Environment variables (Settings → Variables and Secrets; add to Production and Preview):
+On **Cloudflare Pages** instead: build command `npm run build`, build output directory `out`.
+
+Build variables (Settings → Build → Variables and secrets):
 
 | Variable | Value |
 | --- | --- |
@@ -167,16 +177,13 @@ Environment variables (Settings → Variables and Secrets; add to Production and
 | `GOOGLE_SHEET_ID`, `GOOGLE_SHEET_GID` | when the product sheet is ready (section 3) |
 | `CATALOG_STRICT` | `true` (a failed sheet fetch then keeps the previous deployment live) |
 
-Node 22 is picked up from `.nvmrc`. Every push to `main` deploys; pull requests get preview URLs.
+Node 22 is picked up from `.nvmrc`. Every push to `main` deploys.
 `public/_headers` adds caching and security headers.
 
 **GitHub Actions** (`.github/workflows/`):
 
 - `ci.yml`: lint, unit tests, a full build and a type check on every push and pull request.
-- `refresh-catalogue.yml`: calls a Cloudflare deploy hook daily at 03:00 IST (and on demand), so
-  sheet edits go live automatically. Create the hook in Cloudflare (Settings → Builds → Deploy hooks)
-  and save it as the repository secret `CLOUDFLARE_DEPLOY_HOOK_URL`. The same URL works for the
-  sheet's "Publish changes" menu.
+- `refresh-catalogue.yml`: hourly sheet check that triggers a rebuild when products change (section 3).
 
 ### Other hosts
 
@@ -224,6 +231,7 @@ lib/
   seo.ts, business.ts    Metadata, structured data, address and hours helpers
 scripts/
   sync-catalog.ts        The build-time sync
+  sheet-fingerprint.ts   Detects sheet edits for the hourly refresh workflow
   lib/product-images.ts  Product photo download and WebP conversion
   google-apps-script/    "Publish changes" menu for the sheet
 tests/                   Unit tests (node:test)

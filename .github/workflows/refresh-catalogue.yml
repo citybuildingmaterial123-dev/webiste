@@ -1,34 +1,84 @@
-# Rebuilds the live site every day so Google Sheet edits go live even if nobody
-# presses "Website > Publish changes" in the sheet. It calls a Cloudflare Pages
-# deploy hook; Cloudflare then fetches the sheet and rebuilds.
+# Keeps the live site in step with the Google Sheet.
 #
-# Setup: Cloudflare dashboard > Workers & Pages > your project > Settings >
-# Builds > Deploy hooks > Add (branch: main). Copy the URL into this repository:
-# GitHub > Settings > Secrets and variables > Actions > New repository secret
-#   Name: CLOUDFLARE_DEPLOY_HOOK_URL
+# Every hour this reads the product sheet. If its contents changed since the
+# last check, it commits the new fingerprint to data/catalog-version.txt. That
+# push makes Cloudflare rebuild the site, and the build reads the sheet again.
+# Nothing is rebuilt when the sheet has not changed.
 #
-# Run it by hand any time: Actions > Refresh catalogue > Run workflow.
+# Setup (once): GitHub > Settings > Secrets and variables > Actions
+#   Variables tab:  GOOGLE_SHEET_ID, GOOGLE_SHEET_GID   (or GOOGLE_SHEET_CSV_URL)
+#                   GOOGLE_SHEET_TAB                    (only for the API key / service account options)
+#   Secrets tab:    GOOGLE_SHEETS_API_KEY or GOOGLE_SERVICE_ACCOUNT_EMAIL + _PRIVATE_KEY (only if you use them)
+# Use the same values as in the Cloudflare build variables.
+#
+# Publish right now: Actions > Refresh catalogue > Run workflow (tick "force" to
+# rebuild even if the sheet is unchanged, e.g. after replacing a photo on Drive).
 name: Refresh catalogue
 
 on:
   schedule:
-    - cron: "30 21 * * *" # every day at 03:00 India time (21:30 UTC)
+    - cron: "17 * * * *" # every hour
   workflow_dispatch:
+    inputs:
+      force:
+        description: "Rebuild even if the sheet has not changed"
+        type: boolean
+        default: false
 
-permissions: {}
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-catalogue
+  cancel-in-progress: false
 
 jobs:
-  rebuild:
+  check-sheet:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
-      - name: Trigger the Cloudflare Pages deploy hook
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+
+      - name: Read the Google Sheet
+        id: sheet
         env:
-          DEPLOY_HOOK: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK_URL }}
+          GOOGLE_SHEET_ID: ${{ vars.GOOGLE_SHEET_ID }}
+          GOOGLE_SHEET_GID: ${{ vars.GOOGLE_SHEET_GID }}
+          GOOGLE_SHEET_TAB: ${{ vars.GOOGLE_SHEET_TAB }}
+          GOOGLE_SHEET_CSV_URL: ${{ vars.GOOGLE_SHEET_CSV_URL }}
+          GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
+          GOOGLE_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
+          GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY }}
+          FORCE: ${{ inputs.force }}
         run: |
-          if [ -z "$DEPLOY_HOOK" ]; then
-            echo "::warning::CLOUDFLARE_DEPLOY_HOOK_URL secret is not set; nothing to do. See the comments in this workflow."
+          if [ -z "$GOOGLE_SHEET_ID$GOOGLE_SHEET_CSV_URL" ]; then
+            echo "::notice::No sheet configured yet (repository variable GOOGLE_SHEET_ID). Nothing to do."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          curl --fail --silent --show-error --max-time 30 -X POST "$DEPLOY_HOOK"
-          echo "Rebuild requested. Watch it in the Cloudflare Pages dashboard."
+          # lib/googleSheets.ts has no npm dependencies, so tsx alone is enough (no npm ci).
+          new="$(npx -y tsx@4 scripts/sheet-fingerprint.ts)"
+          old="$(tr -d '[:space:]' < data/catalog-version.txt 2>/dev/null || true)"
+          if [ "$new" != "$old" ]; then
+            echo "$new" > data/catalog-version.txt
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "Sheet changed: $old -> $new"
+          elif [ "$FORCE" = "true" ]; then
+            echo "changed=force" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Sheet unchanged."
+          fi
+
+      - name: Commit, which triggers the Cloudflare rebuild
+        if: steps.sheet.outputs.changed != 'false'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/catalog-version.txt
+          git commit --allow-empty -m "Catalogue update from Google Sheets"
+          git push
