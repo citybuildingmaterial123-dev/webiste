@@ -114,7 +114,7 @@ export const siteConfig = {
     establishedYear: null as number | null,
     paragraphs: [
       "We supply building materials to homeowners, contractors, builders, architects, interior designers and fabricators. Hardware, electricals, plywood, roofing, stainless steel, pipes, cladding and doors are all available from one counter.",
-      "Most customers send us their material list first. We check stock, suggest the right grade or size when needed, and reply with prices and availability, so you can plan your purchase before you visit or arrange delivery.",
+      "Most customers send us their material list first. We check stock, suggest the right grade or size when needed, and reply with prices and availability, so you can plan your purchase before you visit.",
     ],
   },
 } as const;

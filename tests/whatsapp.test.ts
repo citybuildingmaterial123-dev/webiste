@@ -29,6 +29,11 @@ test("builds the structured quotation message", () => {
   assert.doesNotMatch(message, /price:|₹|payment/i);
 });
 
+test("uses the singular unit for a quantity of one", () => {
+  const message = buildQuoteMessage({ ...input, items: [{ ...input.items[0], quantity: 1 }] });
+  assert.match(message, /Quantity: 1 Sheet\n/);
+});
+
 test("builds a general enquiry when the list is empty", () => {
   const message = buildQuoteMessage({ ...input, items: [], customer: { ...input.customer, projectDetails: "" } });
   assert.match(message, /I would like to discuss the materials for my project\./);
